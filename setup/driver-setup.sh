@@ -1,5 +1,6 @@
 set -e
-sudo apt install default-jdk scala git wget python3-pip python3-venv -y
+
+sudo apt install default-jdk scala git wget python3-pip -y
 wget https://dlcdn.apache.org/spark/spark-3.5.1/spark-3.5.1-bin-hadoop3.tgz
 tar -xf spark-3.5.1-bin-hadoop3.tgz
 rm spark-3.5.1-bin-hadoop3.tgz
@@ -27,10 +28,10 @@ cat <<EOF > $HADOOP_HOME/etc/hadoop/core-site.xml
 </configuration>
 EOF
 
+sudo apt install python3.11-venv
 python3 -m venv venv
-source venv/bin/activate
+. venv/bin/activate
 
 pip install pyspark jupyter
-pip install --upgrade jupyter_http_over_ws>=0.0.7 && jupyter serverextension enable --py jupyter_http_over_ws
-
-jupyter notebook --no-browser --NotebookApp.allow_origin='https://colab.research.google.com' --NotebookApp.port_retries=0 --port 8888
+pip install --upgrade "jupyter_http_over_ws>=0.0.7"
+jupyter server extension enable --py jupyter_http_over_ws
