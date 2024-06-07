@@ -1,0 +1,7 @@
+pyspark
+PyDrive
+numpy
+pandas
+scipy
+jupyter
+kafka-python
