@@ -15,7 +15,7 @@ logging.basicConfig(
     filemode="a",
     format="%(asctime)s,%(msecs)d %(name)s %(levelname)s %(message)s",
     datefmt="%H:%M:%S",
-    level=logging.INFO,
+    level=logging.WARN,
 )
 
 handler = logging.handlers.RotatingFileHandler(
@@ -27,7 +27,6 @@ handler = logging.handlers.RotatingFileHandler(
 LOGGER = logging.getLogger(__name__)
 
 STOP_EVENT = threading.Event()
-
 
 def stream_1_generator():
     index = 0
@@ -73,6 +72,8 @@ def producer_job(topic: str, stream_generator, server: str):
         # print(f"Sending {time_point} {value} to {topic}")
         logging.info("Sending %s %s to %s", time_point, value, topic)
         producer.send(topic, {"time_point": time_point, "value": value})
+        if time_point > 3_000_000:
+            break
 
 
 def main():

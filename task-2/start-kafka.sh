@@ -28,7 +28,7 @@ rm -f $KAFKA_DIR/logs/*
 echo "Stopping Kafka $KAFKA_VERSION"
 if $KAFKA_DIR/bin/kafka-server-stop.sh; then
   echo "Kafka $KAFKA_VERSION stopped"
-  sleep 5
+  sleep 10
 fi
 
 echo "Cleaning up Kafka $KAFKA_VERSION"
